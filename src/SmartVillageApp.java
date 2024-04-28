@@ -20,7 +20,7 @@ public class SmartVillageApp {
                     AdministrasiMenu.administrasiMenu(scanner);
                     break;
                 case 2:
-                    PelayananDesaMenu.pelayananDesaMenu(scanner);
+                    LayananDesaMenu.layananDesaMenu(scanner);
                     break;
                 case 3:
                     System.out.println("Terima kasih telah menggunakan Aplikasi Smart Village.");
@@ -32,8 +32,86 @@ public class SmartVillageApp {
     }
 }
 
+class AdministrasiMenu {
+    public static void administrasiMenu(Scanner scanner) {
+        System.out.println("Menu Administrasi:");
+        System.out.println("1. Administrasi Umum");
+        System.out.println("2. Administrasi Keuangan");
+        System.out.println("3. Administrasi Kependudukan");
+        System.out.print("Pilih jenis administrasi yang Anda inginkan: ");
+        int administrasiMenu = scanner.nextInt();
+        scanner.nextLine(); // Consume newline
+
+        switch (administrasiMenu) {
+            case 1:
+                administrasiUmum(scanner);
+                break;
+            case 2:
+                administrasiKeuangan(scanner);
+                break;
+            case 3:
+                administrasiKependudukan(scanner);
+                break;
+            default:
+                System.out.println("Menu tidak valid.");
+        }
+    }
+
+    private static void administrasiUmum(Scanner scanner) {
+        System.out.println("Anda memilih Administrasi Umum");
+        System.out.println("\nAdministrasi Umum:");
+        System.out.print("Masukkan nama: ");
+        String nama = scanner.nextLine();
+        System.out.print("Masukkan NIK: ");
+        String nik = scanner.nextLine();
+        System.out.print("Masukkan alamat: ");
+        String alamat = scanner.nextLine();
+
+        // Menampilkan laporan
+        System.out.println("\nLaporan Administrasi Umum:");
+        System.out.println("Nama: " + nama);
+        System.out.println("NIK: " + nik);
+        System.out.println("Alamat: " + alamat);
+    }
+
+    private static void administrasiKeuangan(Scanner scanner) {
+        System.out.println("Anda memilih Administrasi Keuangan");
+        System.out.println("\nAdministrasi Keuangan:");
+        System.out.print("Masukkan kebutuhan: ");
+        String kebutuhan = scanner.nextLine();
+        System.out.print("Masukkan total: ");
+        double total = scanner.nextDouble();
+        scanner.nextLine(); // Consume newline
+        System.out.print("Masukkan tanggal (DD/MM/YYYY): ");
+        String tanggal = scanner.nextLine();
+
+        // Menampilkan laporan
+        System.out.println("\nLaporan Administrasi Keuangan:");
+        System.out.println("Kebutuhan: " + kebutuhan);
+        System.out.println("Total: " + total);
+        System.out.println("Tanggal: " + tanggal);
+    }
+
+    private static void administrasiKependudukan(Scanner scanner) {
+        System.out.println("Anda memilih Administrasi Kependudukan");
+        System.out.println("\nAdministrasi Kependudukan:");
+        System.out.print("Masukkan nama: ");
+        String nama = scanner.nextLine();
+        System.out.print("Masukkan NIK: ");
+        String nik = scanner.nextLine();
+        System.out.print("Masukkan alamat: ");
+        String alamat = scanner.nextLine();
+
+        // Menampilkan laporan
+        System.out.println("\nLaporan Administrasi Kependudukan:");
+        System.out.println("Nama: " + nama);
+        System.out.println("NIK: " + nik);
+        System.out.println("Alamat: " + alamat);
+    }
+}
+
 class LayananDesaMenu {
-    public static void pelayananDesaMenu(Scanner scanner) {
+    public static void layananDesaMenu(Scanner scanner) {
         System.out.println("\nMenu Pelayanan Desa:");
         System.out.println("1. Layanan Umum");
         System.out.println("2. Layanan Kependudukan");
