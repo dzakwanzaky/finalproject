@@ -1,6 +1,8 @@
 import java.util.Scanner;
 
 public class SmartVillageApp {
+    private static int reportIdCounter = 1; // Counter untuk ID laporan
+
     public static void main(String[] args) {
         Scanner scanner = new Scanner(System.in);
 
@@ -30,6 +32,18 @@ public class SmartVillageApp {
             }
         }
     }
+
+    // Fungsi untuk menanyakan user apakah ingin kembali ke menu utama atau menghapus laporan
+    public static boolean askUser(Scanner scanner) {
+        System.out.print("\nApakah Anda ingin kembali ke menu utama atau menghapus laporan? (kembali/hapus): ");
+        String response = scanner.nextLine().toLowerCase();
+        return response.equals("kembali");
+    }
+
+    // Fungsi untuk mengenerate ID laporan
+    public static int generateReportId() {
+        return reportIdCounter++;
+    }
 }
 
 class AdministrasiMenu {
@@ -58,6 +72,7 @@ class AdministrasiMenu {
     }
 
     private static void administrasiUmum(Scanner scanner) {
+        int reportId = SmartVillageApp.generateReportId();
         System.out.println("Anda memilih Administrasi Umum");
         System.out.println("\nAdministrasi Umum:");
         System.out.print("Masukkan nama: ");
@@ -68,13 +83,23 @@ class AdministrasiMenu {
         String alamat = scanner.nextLine();
 
         // Menampilkan laporan
-        System.out.println("\nLaporan Administrasi Umum:");
-        System.out.println("Nama: " + nama);
-        System.out.println("NIK: " + nik);
-        System.out.println("Alamat: " + alamat);
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.println("+      Laporan Administrasi Umum Desa Melati                +");
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.println("| ID Laporan   | Nama         | NIK          | Alamat      |");
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.printf("| %-12d | %-12s | %-12s | %-12s |\n", reportId, nama, nik, alamat);
+        System.out.println("+--------------+--------------+--------------+--------------+");
+
+
+        // Tanyakan user apakah ingin kembali ke menu utama atau menghapus laporan
+        if (!SmartVillageApp.askUser(scanner)) {
+            System.out.println("Laporan dengan ID " + reportId + " berhasil dihapus.");
+        }
     }
 
     private static void administrasiKeuangan(Scanner scanner) {
+        int reportId = SmartVillageApp.generateReportId();
         System.out.println("Anda memilih Administrasi Keuangan");
         System.out.println("\nAdministrasi Keuangan:");
         System.out.print("Masukkan kebutuhan: ");
@@ -85,11 +110,18 @@ class AdministrasiMenu {
         System.out.print("Masukkan tanggal (DD/MM/YYYY): ");
         String tanggal = scanner.nextLine();
 
-        // Menampilkan laporan
-        System.out.println("\nLaporan Administrasi Keuangan:");
-        System.out.println("Kebutuhan: " + kebutuhan);
-        System.out.println("Total: " + total);
-        System.out.println("Tanggal: " + tanggal);
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.println("+      Laporan Administrasi Keuangan Desa Melati            +");
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.println("| ID Laporan   | Kebutuhan    | Total        | Tanggal      |");
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.printf("| %-12d | %-12s | %-12s | %-12s |\n", reportId, kebutuhan, total, tanggal);
+        System.out.println("+--------------+--------------+--------------+--------------+");
+
+        // Tanyakan user apakah ingin kembali ke menu utama atau menghapus laporan
+        if (!SmartVillageApp.askUser(scanner)) {
+            System.out.println("Laporan dengan ID " + reportId + " berhasil dihapus.");
+        }
     }
 
     private static void administrasiKependudukan(Scanner scanner) {
@@ -103,10 +135,25 @@ class AdministrasiMenu {
         String alamat = scanner.nextLine();
 
         // Menampilkan laporan
+        int reportId = SmartVillageApp.generateReportId();
         System.out.println("\nLaporan Administrasi Kependudukan:");
+        System.out.println("ID Laporan: " + reportId);
         System.out.println("Nama: " + nama);
         System.out.println("NIK: " + nik);
         System.out.println("Alamat: " + alamat);
+
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.println("+      Laporan Administrasi Kependudukan Desa Melati        +");
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.println("| ID Laporan   | Nama         | NIK          | Alamat       |");
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.printf("| %-12d | %-12s | %-12s | %-12s |\n", reportId, nama, nik, alamat);
+        System.out.println("+--------------+--------------+--------------+--------------+");
+
+        // Tanyakan user apakah ingin kembali ke menu utama atau menghapus laporan
+        if (!SmartVillageApp.askUser(scanner)) {
+            System.out.println("Laporan dengan ID " + reportId + " berhasil dihapus.");
+        }
     }
 }
 
@@ -116,7 +163,6 @@ class LayananDesaMenu {
         System.out.println("1. Layanan Umum");
         System.out.println("2. Layanan Kependudukan");
         System.out.println("3. Layanan Pernikahan");
-        System.out.println("4. Layanan Baru");
         System.out.print("Pilih jenis layanan desa yang Anda inginkan: ");
         int layananMenu = scanner.nextInt();
         scanner.nextLine(); // Consume newline
@@ -130,9 +176,6 @@ class LayananDesaMenu {
                 break;
             case 3:
                 layananPernikahan(scanner);
-                break;
-            case 4:
-                layananBaru(scanner);
                 break;
             default:
                 System.out.println("Menu tidak valid.");
@@ -149,10 +192,25 @@ class LayananDesaMenu {
         String alamat = scanner.nextLine();
 
         // Menampilkan laporan
+        int reportId = SmartVillageApp.generateReportId();
         System.out.println("\nLaporan Layanan Umum:");
+        System.out.println("ID Laporan: " + reportId);
         System.out.println("Nama: " + nama);
         System.out.println("NIK: " + nik);
         System.out.println("Alamat: " + alamat);
+
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.println("+          Laporan Layanan Umum Desa Melati                 +");
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.println("| ID Laporan   | Nama         | NIK          | Alamat       |");
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.printf("| %-12d | %-12s | %-12s | %-12s |\n", reportId, nama, nik, alamat);
+        System.out.println("+--------------+--------------+--------------+--------------+");
+
+        // Tanyakan user apakah ingin kembali ke menu utama atau menghapus laporan
+        if (!SmartVillageApp.askUser(scanner)) {
+            System.out.println("Laporan dengan ID " + reportId + " berhasil dihapus.");
+        }
     }
 
     private static void layananKependudukan(Scanner scanner) {
@@ -165,10 +223,25 @@ class LayananDesaMenu {
         String alamat = scanner.nextLine();
 
         // Menampilkan laporan
+        int reportId = SmartVillageApp.generateReportId();
         System.out.println("\nLaporan Layanan Kependudukan:");
+        System.out.println("ID Laporan: " + reportId);
         System.out.println("Nama: " + nama);
         System.out.println("NIK: " + nik);
         System.out.println("Alamat: " + alamat);
+
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.println("+      Laporan Layanan Kependudukan Desa Melati             +");
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.println("| ID Laporan   | Nama         | NIK          | Alamat       |");
+        System.out.println("+--------------+--------------+--------------+--------------+");
+        System.out.printf("| %-12d | %-12s | %-12s | %-12s |\n", reportId, nama, nik, alamat);
+        System.out.println("+--------------+--------------+--------------+--------------+");
+
+        // Tanyakan user apakah ingin kembali ke menu utama atau menghapus laporan
+        if (!SmartVillageApp.askUser(scanner)) {
+            System.out.println("Laporan dengan ID " + reportId + " berhasil dihapus.");
+        }
     }
 
     private static void layananPernikahan(Scanner scanner) {
@@ -187,29 +260,27 @@ class LayananDesaMenu {
         String alamatWanita = scanner.nextLine();
 
         // Menampilkan laporan
+        int reportId = SmartVillageApp.generateReportId();
         System.out.println("\nLaporan Layanan Pernikahan:");
+        System.out.println("ID Laporan: " + reportId);
         System.out.println("Nama Pengantin Pria: " + namaPria);
         System.out.println("NIK Pengantin Pria: " + nikPria);
         System.out.println("Alamat Pengantin Pria: " + alamatPria);
         System.out.println("Nama Pengantin Wanita: " + namaWanita);
         System.out.println("NIK Pengantin Wanita: " + nikWanita);
         System.out.println("Alamat Pengantin Wanita: " + alamatWanita);
-    }
 
-    // Metode untuk layanan baru yang menunjukkan Polymorphism
-    private static void layananBaru(Scanner scanner) {
-        System.out.println("\nLayanan Baru:");
-        System.out.print("Masukkan nama: ");
-        String nama = scanner.nextLine();
-        System.out.print("Masukkan NIK: ");
-        String nik = scanner.nextLine();
-        System.out.print("Masukkan alamat: ");
-        String alamat = scanner.nextLine();
+        System.out.println("+--------------+----------------------------+---------------------------+------------------------------+------------------------------+-----------------------------+--------------------------------+");
+        System.out.println("+                                                                                    Laporan Layanan Pernikahan Desa Melati                                                                          +");
+        System.out.println("+--------------+----------------------------+---------------------------+------------------------------+------------------------------+-----------------------------+--------------------------------+");
+        System.out.println("| ID Laporan   | Nama Pengantin Pria        | NIK Pengantin Pria        | Alamat Pengantin Pria        | Nama Pengantin Wanita        | NIK Pengantin Wanita        | Alamat Pengantin Wanita        |");
+        System.out.println("+--------------+----------------------------+---------------------------+------------------------------+------------------------------+-----------------------------+--------------------------------+");
+        System.out.printf("| %-12d | %-26s | %-25s | %-28s | %-28s | %-27s | %-30s |\n", reportId, namaPria, nikPria, alamatPria, namaWanita, nikWanita, alamatWanita);
+        System.out.println("+--------------+----------------------------+---------------------------+------------------------------+------------------------------+-----------------------------+--------------------------------+");
 
-        // Menampilkan laporan
-        System.out.println("\nLaporan Layanan Baru:");
-        System.out.println("Nama: " + nama);
-        System.out.println("NIK: " + nik);
-        System.out.println("Alamat: " + alamat);
+        // Tanyakan user apakah ingin kembali ke menu utama atau menghapus laporan
+        if (!SmartVillageApp.askUser(scanner)) {
+            System.out.println("Laporan dengan ID " + reportId + " berhasil dihapus.");
+        }
     }
 }
